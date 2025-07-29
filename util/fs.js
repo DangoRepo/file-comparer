@@ -1,4 +1,5 @@
 import FsExtra from 'fs-extra';
+import Path from 'path';
 
 function readFile(file, encoding) {
     if (!file) {
@@ -32,9 +33,22 @@ function writeJson (file, content) {
     FsExtra.outputJsonSync(file, content, 'utf-8');
 }
 
+function copyFile(src, dest) {
+    if (!src || !dest) {
+        return;
+    }
+
+    // 确保目标目录存在
+    const destDir = Path.dirname(dest);
+    FsExtra.ensureDirSync(destDir);
+
+    FsExtra.copyFileSync(src, dest);
+}
+
 export default {
     readFile,
     writeFile,
     readJson,
-    writeJson
+    writeJson,
+    copyFile
 };
