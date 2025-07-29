@@ -145,7 +145,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="右侧侧文件名"
+          label="右侧文件名"
           sortable="custom"
           prop="rhs">
           <template slot-scope="scope">
