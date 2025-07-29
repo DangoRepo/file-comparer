@@ -29,8 +29,8 @@
    ```
 
 5. **注**：
-   - `npm` 为 `Node.js` 的包管理工具；此外，上述步骤会开启 `yarn` 和 `pnpm` 包管理工具。
-   - 此文档中会提供 `npm`、`pnpm` 和 `yarn` 三套命令，根据你使用的工具，只需执行其中一句即可。
+   - `npm` 为 `Node.js` 的包管理工具；此外，上述步骤会开启 `pnpm` 包管理工具。
+   - 此文档中会提供 `npm`、`pnpm` 两套命令，根据你使用的工具，只需执行其中一句即可。
 
 ## 使用方法
 1. Windows 下打开命令提示符（`CMD.exe`），Linux / Unix / MacOS 下打开终端，使用 `cd` 命令切换到解压后的工具目录
@@ -45,7 +45,6 @@
    ```bash
    npm i
    pnpm i
-   yarn install
    ```
 
 3. 运行以下命令，进行文件对比，生成报告
@@ -53,7 +52,6 @@
    ```bash
    npm run compare -- ...参数
    pnpm run compare ...参数
-   yarn compare ...参数
 
    ```
    参数说明：
@@ -66,11 +64,19 @@
 | `--rhs`<br>`-r` | 是 | | 右侧对比文件夹路径 |
 | `--output`<br>`-o` | 是 | | 报告生成的文件夹路径 |
 
-4. 报告文件生成在报告文件夹，如果报告文件不存在会自动生成，具体文件的作用请参照「报告文件说明」部分
+4. 比较结果会生成在报告文件夹，如果报告文件夹不存在会自动生成
+
+- `/delete/` 删除的文件
+- `/modify/` 发生更改的文件
+- `/new/` 新增的文件
+
+5. 报告文件生成在报告文件夹，如果报告文件不存在会自动生成，具体文件的作用请参照「报告文件说明」部分
 
 ## 报告文件说明
 
+- `analysis.json` 左右文件夹中文件的比较结果（仅统计数量），JSON 格式
 - `file-summary-lhs.json` 左文件夹中文件的摘要数据，JSON 格式
 - `file-summary-rhs.json` 右文件夹中文件的摘要数据，JSON 格式
 - `compare-summary.json` 左右文件夹中文件的比较结果摘要，JSON 格式
 - `compare-summary.html` 可视化的文件对比报告，可直接使用浏览器打开
+- `/modify/renamed-files.json` 文件名发生变化的文件列表，JSON 格式
