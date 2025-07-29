@@ -1,6 +1,7 @@
 import UtilArgs from './util/args.js';
 import UtilPath from './util/path.js';
 import UtilFs from './util/fs.js';
+import UtilIntelligentCompare from './util/intelligent-compare.js';
 import UtilCompare from './util/compare.js';
 import UtilQueue from './util/queue.js';
 
@@ -44,4 +45,27 @@ const argv = UtilArgs.getArgv();
     // save compare report
     const compareReportOutputPath = UtilPath.resolve(argv.o, './compare-report.html');
     UtilFs.writeFile(compareReportOutputPath, compareReport);
+
+    // Copy added and removed files to respective directories
+    const newDir = UtilPath.resolve(argv.o, './new');
+    const deleteDir = UtilPath.resolve(argv.o, './delete');
+
+    // Process each comparison result
+    compareResortSummary.forEach(item => {
+        if (item.type === 'add') {
+            // Copy files from rhs (new files)
+            item.rhs.forEach(file => {
+                const destPath = UtilPath.resolve(newDir, file.filename);
+                UtilFs.copyFile(file.path, destPath);
+            });
+        } else if (item.type === 'remove') {
+            // Copy files from lhs (deleted files)
+            item.lhs.forEach(file => {
+                const destPath = UtilPath.resolve(deleteDir, file.filename);
+                UtilFs.copyFile(file.path, destPath);
+            });
+        }
+    });
+
+    UtilIntelligentCompare.generateModifyMapping(lhsFileSummary, rhsFileSummary, argv.o);
 })();
