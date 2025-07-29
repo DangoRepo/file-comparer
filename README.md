@@ -79,4 +79,4 @@
 - `file-summary-rhs.json` 右文件夹中文件的摘要数据，JSON 格式
 - `compare-summary.json` 左右文件夹中文件的比较结果摘要，JSON 格式
 - `compare-summary.html` 可视化的文件对比报告，可直接使用浏览器打开
-- `/modify/renamed-files.json` 文件名发生变化的文件列表，JSON 格式
+- `/modify/renamed-files.json` 文件名发生变化的文件，JSON 格式
